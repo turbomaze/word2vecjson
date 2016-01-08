@@ -21,6 +21,19 @@ var Word2VecUtils = (function() {
 
   /******************
    * work functions */
+  function mixAndMatchN(n, sub1, sub2, add1) {
+    for (var ai = 1; ai < arguments.length; ai++) {
+      if (!wordVecs.hasOwnProperty(arguments[ai])) {
+        return 'The word "'+arguments[ai]+'" is not in the data set.';
+      }
+    }
+
+    return getNClosestMatches(
+      n,
+      addVecs(wordVecs[add1], subVecs(wordVecs[sub1], wordVecs[sub2]))
+    ); 
+  }
+
   function getNClosestMatches(n, vec) {
     var sims = [];
     for (var word in wordVecs) {
@@ -67,6 +80,7 @@ var Word2VecUtils = (function() {
   }
 
   return {
+    mixAndMatchN: mixAndMatchN,
     addVecs: addVecs,
     subVecs: subVecs,
     getNClosestMatches: getNClosestMatches,
