@@ -56,7 +56,7 @@ var Word2VecUtils = (function() {
 
     return getNClosestMatches(
       n,
-      addVecs(wordVecs[add1], subVecs(wordVecs[sub1], wordVecs[sub2]))
+      norm(addVecs(wordVecs[add1], subVecs(wordVecs[sub1], wordVecs[sub2])))
     ); 
   }
 
@@ -84,6 +84,10 @@ var Word2VecUtils = (function() {
 
   /********************
    * helper functions */
+  function getL2Norm(a, b) {
+    return mag(subVecs(a, b));
+  }
+
   function getCosSim(f1, f2) {
     return Math.abs(f1.reduce(function(sum, a, idx) {
       return sum + a*f2[idx];
@@ -97,9 +101,9 @@ var Word2VecUtils = (function() {
   }
 
   function norm(a) {
-    var mag = mag(a);
+    var magnitude = mag(a);
     return a.map(function(val) {
-      return val/mag; 
+      return val/magnitude; 
     });
   }
 
