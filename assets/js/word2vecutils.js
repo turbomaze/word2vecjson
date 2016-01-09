@@ -21,10 +21,36 @@ var Word2VecUtils = (function() {
 
   /******************
    * work functions */
+  function diffN(n, word1, word2) {
+    for (var ai = 1; ai < arguments.length; ai++) {
+      if (!wordVecs.hasOwnProperty(arguments[ai])) {
+        return [false, arguments[ai]];
+      }
+    }
+
+    return getNClosestMatches(
+      n,
+      subVecs(wordVecs[word1], wordVecs[word2])
+    ); 
+  }
+
+  function composeN(n, word1, word2) {
+    for (var ai = 1; ai < arguments.length; ai++) {
+      if (!wordVecs.hasOwnProperty(arguments[ai])) {
+        return [false, arguments[ai]];
+      }
+    }
+
+    return getNClosestMatches(
+      n,
+      addVecs(wordVecs[word1], wordVecs[word2])
+    ); 
+  }
+
   function mixAndMatchN(n, sub1, sub2, add1) {
     for (var ai = 1; ai < arguments.length; ai++) {
       if (!wordVecs.hasOwnProperty(arguments[ai])) {
-        return 'The word "'+arguments[ai]+'" is not in the data set.';
+        return [false, arguments[ai]];
       }
     }
 
@@ -32,6 +58,16 @@ var Word2VecUtils = (function() {
       n,
       addVecs(wordVecs[add1], subVecs(wordVecs[sub1], wordVecs[sub2]))
     ); 
+  }
+
+  function findSimilarWords(n, word) {
+    if (!wordVecs.hasOwnProperty(word)) {
+      return [false, word];
+    }
+
+    return getNClosestMatches(
+      n, wordVecs[word]
+    );
   }
 
   function getNClosestMatches(n, vec) {
@@ -80,6 +116,9 @@ var Word2VecUtils = (function() {
   }
 
   return {
+    diffN: diffN,
+    composeN: composeN,
+    findSimilarWords: findSimilarWords,
     mixAndMatchN: mixAndMatchN,
     addVecs: addVecs,
     subVecs: subVecs,
