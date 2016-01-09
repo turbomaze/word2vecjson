@@ -3,10 +3,31 @@
   <head>
     <meta charset="utf-8">
     <title>Word to Vec JS Demo</title>
-    <script src="data/wordvecs.js"></script>
+    <script src="data/wordvecs10000.js"></script>
+    <script src="assets/js/word2vecutils.js"></script>
     <script src="assets/js/word2vecdemo.js"></script>
   </head>
   <body>
-    <table id="cont"></table>
+    <h2>Word to Vec JS Demo</h2>
+    
+    <h3>Similar Words</h3>
+    <p>Enter a word and see words with similar vectors.</p>
+    <input placeholder="Target word"
+           type="text" id="target-word">
+    <input type="button" value="List words" id="list-sim-btn">
+    <br>
+    <table id="sim-table"></table>
+
+    <h3>Word Algebra</h3>
+    <p>Enter all three words, the first two, or the last two and see the words that result.</p>
+    <input placeholder="Word 1" type="text" id="word-1"> + 
+    (<input placeholder="Word 2" type="text" id="word-2"> -
+    <input placeholder="Word 3" type="text" id="word-3">) =
+    <input type="button" value="Get result" id="solve-eqn-btn">
+    <table id="eqn-table"></table>
+
+    <hr>
+
+    &copy; <a href="igliu.com">Anthony Liu</a> 2016
   </body>
 </html>
