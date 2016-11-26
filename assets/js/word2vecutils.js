@@ -1,7 +1,7 @@
 /******************\
 |  Word2Vec Utils  |
 | @author Anthony  |
-| @version 0.2     |
+| @version 0.2.1   |
 | @date 2016/01/08 |
 | @edit 2016/01/09 |
 \******************/
